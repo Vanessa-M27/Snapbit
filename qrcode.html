@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Screen</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #E7F6F3;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background: #ffffff00;
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .timer {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .qr-box {
+      width: 150px;
+      height: 150px;
+      background: #FFFFFF;
+      border-radius: 20px;
+      margin: 0 auto 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .qr-box img {
+      width: 120px;
+      height: 120px;
+    }
+
+    h2 {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 13px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="timer" id="timer">01:00</div>
+    
+    <div class="qr-box">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=example" alt="QR Code">
+    </div>
+
+    <h2>Here’s Your QR Code!</h2>
+    <p>Please! do Remember that<br>the QR Code is only available<br>for 3 Days!!!</p>
+  </div>
+
+  <script>
+  //counter time
+    let timeLeft = 60; 
+    const timerElement = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+
+      timerElement.textContent =
+        `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+      timeLeft--;
+
+      if (timeLeft < 0) {
+        clearInterval(countdown);
+        timerElement.textContent = "Expired";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
